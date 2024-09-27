@@ -24,18 +24,14 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * name of this class or
  * the package after creating this project, you must also update the
  * build.gradle file in the
- * project.
+ * project'
  */
 import org.carlmontrobotics.subsystems.Shooter;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  /*
-   
-  private CANSparkMax motor = MotorControllerFactory.createSparkMax(1, MotorConfig.NEO_550);
-  private SimpleMotorFeedforward feedforward = new SimpleMotorFeedforward(.1, 985.6);
-  private SparkPIDController pidController = motor.getPIDController();
-   */
+  private int age = 14;
+  
   @Override
   public void robotInit() {
     
