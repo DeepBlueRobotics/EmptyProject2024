@@ -30,7 +30,12 @@ import org.carlmontrobotics.subsystems.Shooter;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
-  private int age = 14;
+
+  //CANSparkMax motor1 = MotorControllerFactory.createSparkMax(1, MotorConfig.NEO_550);
+  CANSparkMax motor2 = MotorControllerFactory.createSparkMax(1, MotorConfig.NEO);
+
+  
+  
   @Override
   public void robotInit() {
     
@@ -72,6 +77,8 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopPeriodic() {
+    //motor1.set(0.1);
+    motor2.set(0.1);
   }
 
   @Override
