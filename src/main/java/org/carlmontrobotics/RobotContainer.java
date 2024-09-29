@@ -35,8 +35,8 @@ public class RobotContainer {
 
   //1. using GenericHID allows us to use different kinds of controllers
   //2. Use absolute paths from constants to reduce confusion
-  private final XboxController driverController = new XboxController(Constants.Driver.DRIVER_CONTROLLER_PORT);
-  private final XboxController manipulatorController = new XboxController(Constants.Manipulator.MANIPULATOR_CONTROLLER_PORT);
+  private final XboxController driverController = new XboxController(Constants.IO.DRIVER_CONTROLLER_PORT);
+  private final XboxController manipulatorController = new XboxController(Constants.IO.MANIPULATOR_CONTROLLER_PORT);
   private final Drivetrain drivetrain = new Drivetrain(driverController);
 
   public RobotContainer() {
@@ -58,7 +58,7 @@ public class RobotContainer {
 
 
   public double rightJoystickValue() {
-    return driverController.getRightX();
+    return driverController.getRightY();
   }
   public double leftJoystickValue() {
     return driverController.getLeftY();

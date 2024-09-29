@@ -5,6 +5,8 @@
 package org.carlmontrobotics.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+
+import org.carlmontrobotics.Constants;
 import org.carlmontrobotics.subsystems.Drivetrain;
 
 public class Autonomous extends Command {
@@ -18,7 +20,10 @@ public class Autonomous extends Command {
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    dt.setAuto(true);
+    dt.autoDrive();
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
@@ -26,11 +31,14 @@ public class Autonomous extends Command {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    dt.setAuto(false);
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return dt.rightPosition() * (Constants.Drivetrainc.WHEEL_RADIUS*2) >= (Constants.Drivetrainc.GOAL_FEET)/12;
+    //TODO: for MA, change wheel radius and goal pos if needed
   }
 }
