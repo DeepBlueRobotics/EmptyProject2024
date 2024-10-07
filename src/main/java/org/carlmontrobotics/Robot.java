@@ -7,9 +7,13 @@ package org.carlmontrobotics;
 import org.carlmontrobotics.lib199.MotorConfig;
 import org.carlmontrobotics.lib199.MotorControllerFactory;
 
+import com.revrobotics.AbsoluteEncoder;
+import com.revrobotics.CANSparkBase;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
+import com.revrobotics.SparkAbsoluteEncoder;
 import com.revrobotics.SparkPIDController;
+import com.revrobotics.CANSparkBase.IdleMode;
 
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.TimedRobot;
@@ -32,13 +36,16 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
 
   //CANSparkMax motor1 = MotorControllerFactory.createSparkMax(1, MotorConfig.NEO_550);
-  CANSparkMax motor2 = MotorControllerFactory.createSparkMax(1, MotorConfig.NEO);
+  CANSparkMax motor1 = MotorControllerFactory.createSparkMax(9, MotorConfig.NEO);
+  CANSparkMax motor2 = MotorControllerFactory.createSparkMax(1, MotorConfig.NEO_550);
+  SparkAbsoluteEncoder m2e = motor2.getAbsoluteEncoder();
 
   
   
   @Override
   public void robotInit() {
-    
+    motor2.setIdleMode(CANSparkBase.IdleMode.kCoast);
+    motor1.setIdleMode(CANSparkBase.IdleMode.kBrake);
     
     m_robotContainer = new RobotContainer();
       }
@@ -78,7 +85,9 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     //motor1.set(0.1);
-    motor2.set(0.1);
+    //motor2.set(0.1);
+    double vel = m2e.getVelocity();
+    motor1.set(vel/11000);
   }
 
   @Override
