@@ -4,61 +4,28 @@
 
 package org.carlmontrobotics;
 
-import org.carlmontrobotics.lib199.MotorConfig;
-import org.carlmontrobotics.lib199.MotorControllerFactory;
-
-import com.revrobotics.AbsoluteEncoder;
-import com.revrobotics.CANSparkBase;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.ControlType;
-import com.revrobotics.SparkAbsoluteEncoder;
-import com.revrobotics.SparkPIDController;
-import com.revrobotics.CANSparkBase.IdleMode;
-
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 /**
- * The VM is configured to automatically run this class, and to call the
- * functions corresponding to
- * each mode, as described in the TimedRobot documentation. If you change the
- * name of this class or
- * the package after creating this project, you must also update the
- * build.gradle file in the
+ * The VM is configured to automatically run this class, and to call the functions corresponding to
+ * each mode, as described in the TimedRobot documentation. If you change the name of this class or
+ * the package after creating this project, you must also update the build.gradle file in the
  * project.
  */
-import org.carlmontrobotics.subsystems.Shooter;
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
   private RobotContainer m_robotContainer;
 
-  //CANSparkMax motor1 = MotorControllerFactory.createSparkMax(1, MotorConfig.NEO_550);
-  CANSparkMax motor1 = MotorControllerFactory.createSparkMax(9, MotorConfig.NEO);
-  CANSparkMax motor2 = MotorControllerFactory.createSparkMax(1, MotorConfig.NEO_550);
-  SparkAbsoluteEncoder m2e = motor2.getAbsoluteEncoder();
-
-  
-  
   @Override
   public void robotInit() {
-    motor2.setIdleMode(CANSparkBase.IdleMode.kCoast);
-    motor1.setIdleMode(CANSparkBase.IdleMode.kBrake);
-    
     m_robotContainer = new RobotContainer();
-      }
+  }
 
   @Override
-  
   public void robotPeriodic() {
     CommandScheduler.getInstance().run();
-    /*
-     
-    pidController.setReference(0.0, ControlType.kVelocity, 0);
-    motor.setVoltage(feedforward.calculate(SmartDashboard.getNumber("Motor RPM", 0)));
-     */
   }
 
   @Override
@@ -67,13 +34,11 @@ public class Robot extends TimedRobot {
 
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
-
     }
   }
 
   @Override
-  public void autonomousPeriodic() {
-  }
+  public void autonomousPeriodic() {}
 
   @Override
   public void teleopInit() {
@@ -83,20 +48,13 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void teleopPeriodic() {
-    //motor1.set(0.1);
-    //motor2.set(0.1);
-    double vel = m2e.getVelocity();
-    motor1.set(vel/11000);
-  }
+  public void teleopPeriodic() {}
 
   @Override
-  public void disabledInit() {
-  }
+  public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {
-  }
+  public void disabledPeriodic() {}
 
   @Override
   public void testInit() {
@@ -104,14 +62,11 @@ public class Robot extends TimedRobot {
   }
 
   @Override
-  public void testPeriodic() {
-  }
+  public void testPeriodic() {}
 
   @Override
-  public void simulationInit() {
-  }
+  public void simulationInit() {}
 
   @Override
-  public void simulationPeriodic() {
-  }
+  public void simulationPeriodic() {}
 }
