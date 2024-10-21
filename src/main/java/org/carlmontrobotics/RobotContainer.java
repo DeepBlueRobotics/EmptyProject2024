@@ -9,6 +9,11 @@ package org.carlmontrobotics;
 // import org.carlmontrobotics.commands.*;
 import static org.carlmontrobotics.Constants.OI;
 
+import org.carlmontrobotics.lib199.MotorConfig;
+import org.carlmontrobotics.lib199.MotorControllerFactory;
+
+import com.revrobotics.CANSparkFlex;
+
 //controllers
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController.Axis;
@@ -31,13 +36,16 @@ public class RobotContainer {
   //2. Use absolute paths from constants to reduce confusion
   public final GenericHID driverController = new GenericHID(OI.Driver.port);
   public final GenericHID manipulatorController = new GenericHID(OI.Manipulator.port);
+  CANSparkFlex vortex = MotorControllerFactory.createSparkFlex(1, MotorConfig.NEO_VORTEX);
 
   public RobotContainer() {
 
     setDefaultCommands();
     setBindingsDriver();
     setBindingsManipulator();
+    vortex.set(0.1);
   }
+ 
 
   private void setDefaultCommands() {
     // drivetrain.setDefaultCommand(new TeleopDrive(
